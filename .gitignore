@@ -31,3 +31,5 @@ build/
 
 ### VS Code ###
 .vscode/
+/data/app_db.mv.db
+/.jpb/jpb-settings.xml

@@ -1,5 +1,6 @@
 package com.planner.vleermuis;
 
+import javafx.application.Application;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -7,7 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class VleermuisApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(VleermuisApplication.class, args);
+		Application.launch(PlannerApplication.class, args);
 	}
 
 }
