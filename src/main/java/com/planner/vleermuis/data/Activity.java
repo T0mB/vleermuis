@@ -2,6 +2,8 @@ package com.planner.vleermuis.data;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
+import java.time.Month;
 import java.util.Date;
 
 @Entity
@@ -19,7 +21,7 @@ public class Activity {
     private String location;
 
     @Column(name="at_date", nullable = false)
-    private Date atDate;
+    private LocalDate atDate;
 
     @Column(name="description")
     private String description;
@@ -27,6 +29,10 @@ public class Activity {
     @ManyToOne
     @JoinColumn(name="agenda_id", nullable = false)
     protected Agenda agenda;
+
+    public Month getMonthOfActivity(){
+        return atDate.getMonth();
+    }
 
     public Agenda getAgenda() {return agenda;};
 
@@ -54,11 +60,11 @@ public class Activity {
         this.location = location;
     }
 
-    public Date getAtDate() {
+    public LocalDate getAtDate() {
         return atDate;
     }
 
-    public void setAtDate(Date atDate) {
+    public void setAtDate(LocalDate atDate) {
         this.atDate = atDate;
     }
 
