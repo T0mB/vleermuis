@@ -1,10 +1,11 @@
 package com.planner.vleermuis;
 
-import com.planner.vleermuis.gui.PlannerApplication;
 import javafx.application.Application;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
+@ComponentScan
 public class VleermuisApplication {
 
 	public static void main(String[] args) {

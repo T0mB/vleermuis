@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 
 import java.time.LocalDate;
 import java.time.Month;
-import java.util.Date;
 
 @Entity
 @Table(name = "activity")
@@ -34,45 +33,26 @@ public class Activity {
         return atDate.getMonth();
     }
 
-    public Agenda getAgenda() {return agenda;};
+    public Agenda getAgenda() {return agenda;}
 
     public Long getId() {
         return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public String getLocation() {
         return location;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
     }
 
     public LocalDate getAtDate() {
         return atDate;
     }
 
-    public void setAtDate(LocalDate atDate) {
-        this.atDate = atDate;
-    }
-
     public String getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
 }

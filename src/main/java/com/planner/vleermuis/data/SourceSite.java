@@ -17,27 +17,29 @@ public class SourceSite {
     @Column(name="link", nullable = false)
     private String link;
 
-    public long getId() {
-        return id;
+    public SourceSite(String name, String link) {
+        this.name = name;
+        this.link = link;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    /**
+     * only here so app won't complain
+     */
+    public SourceSite(){
+
+    }
+
+    public long getId() {
+        return id;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
 
     public String getLink() {
         return link;
     }
 
-    public void setLink(String link) {
-        this.link = link;
-    }
 }
