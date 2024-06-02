@@ -3,6 +3,7 @@ package com.planner.vleermuis.businesslogic.impl;
 import com.planner.vleermuis.businesslogic.SourceSiteLogic;
 import com.planner.vleermuis.data.SourceSite;
 import com.planner.vleermuis.data.dao.SourceSiteDAO;
+import org.apache.commons.validator.routines.UrlValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -18,8 +19,16 @@ public class SourceSiteLogicImpl implements SourceSiteLogic {
 
     @Override
     public void createLink(String name, String link) {
-        SourceSite site = new SourceSite(name, link);
-        sourceSiteDAO.save(site);
+
+        UrlValidator validator = new UrlValidator();
+        if(validator.isValid(link)){
+            SourceSite site = new SourceSite(name, link);
+            sourceSiteDAO.save(site);
+        }
+        else {
+            throw new RuntimeException("false link");
+            //TODO better messaging etc.
+        }
     }
 
     @Override

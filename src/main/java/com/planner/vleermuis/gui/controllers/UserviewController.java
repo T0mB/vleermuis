@@ -13,6 +13,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ListView;
 import javafx.scene.text.Text;
+import javafx.scene.web.WebEngine;
+import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -49,6 +51,9 @@ public class UserviewController implements Initializable {
     @FXML
     private ListView<SourceSite> sourceSiteListView;
 
+    @FXML
+    private WebView webViewWidget;
+
     String[] test = {"xyz", "abc"};
 
     @Override
@@ -69,6 +74,8 @@ public class UserviewController implements Initializable {
 
         monthText.setText(today.getMonth().name());
         yearText.setText(String.valueOf(today.getYear()));
+
+        setUpWebView();
     }
 
 
@@ -115,6 +122,11 @@ public class UserviewController implements Initializable {
     private void drawCalendarView() {
         monthText.setText(pickedDate.getMonth().name());
         yearText.setText(String.valueOf(pickedDate.getYear()));
+    }
+
+    private void setUpWebView(){
+        WebEngine webEngine = webViewWidget.getEngine();
+        webEngine.load("http://google.com");
     }
 
 
