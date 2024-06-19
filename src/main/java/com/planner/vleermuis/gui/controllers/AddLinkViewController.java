@@ -41,4 +41,6 @@ public class AddLinkViewController implements Initializable {
         Stage stage = (Stage) linkConfirmButton.getScene().getWindow();
         stage.close();
     }
+
+
 }

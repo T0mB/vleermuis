@@ -51,7 +51,7 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.web.WebView?>
 
-<VBox prefHeight="744.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.planner.vleermuis.gui.controllers.UserviewController">
+<VBox prefHeight="920.0" prefWidth="1433.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.planner.vleermuis.gui.controllers.UserviewController">
     <MenuBar VBox.vgrow="NEVER">
         <Menu mnemonicParsing="false" text="File">
             <MenuItem mnemonicParsing="false" text="New" />
@@ -83,7 +83,7 @@
             <MenuItem mnemonicParsing="false" text="About MyHelloApp" />
         </Menu>
     </MenuBar>
-    <SplitPane dividerPositions="0.20701168614357263, 0.6160267111853088" focusTraversable="true" prefHeight="592.0" prefWidth="957.0" VBox.vgrow="ALWAYS">
+    <SplitPane dividerPositions="0.206848357791754, 0.4954577218728162" focusTraversable="true" prefHeight="592.0" prefWidth="957.0" VBox.vgrow="ALWAYS">
         <AnchorPane>
             <Label alignment="CENTER" layoutX="14.0" layoutY="14.0" minWidth="60.0" prefWidth="-1.0" style="&#10;" text="Master" textAlignment="CENTER" wrapText="false">
                 <font>
@@ -93,17 +93,18 @@
                     <Color red="0.624" green="0.624" blue="0.624" fx:id="x2" />
                 </textFill>
             </Label>
-            <ListView fx:id="sourceSiteListView" layoutX="10.0" layoutY="41.0" prefHeight="621.0" prefWidth="226.0" />
-            <HBox layoutX="14.0" layoutY="667.0" prefHeight="27.0" prefWidth="154.0" spacing="5.0">
+            <ListView fx:id="sourceSiteListView" layoutX="10.0" layoutY="41.0" prefHeight="782.0" prefWidth="278.0" />
+            <HBox layoutX="10.0" layoutY="830.0" prefHeight="27.0" prefWidth="208.0" spacing="5.0">
                 <Button mnemonicParsing="false" onAction="#addLinkClicked" text="Add" />
                 <Button mnemonicParsing="false" onAction="#editLinkClicked" text="Edit" />
                 <Button mnemonicParsing="false" onAction="#removeLinkClicked" text="Remove" />
+            <Button mnemonicParsing="false" onAction="#loadLinkClicked" text="Load" />
             </HBox>
         </AnchorPane>
         <ScrollPane prefHeight="-1.0" prefWidth="-1.0">
-            <AnchorPane id="Content" minHeight="-1.0" minWidth="-1.0" prefHeight="694.0" prefWidth="484.0">
-                <ListView fx:id="calendarView" layoutX="5.0" layoutY="41.0" prefHeight="649.0" prefWidth="474.0" />
-                <HBox alignment="CENTER" layoutX="33.0" prefHeight="44.0" prefWidth="419.0" spacing="5.0">
+            <AnchorPane id="Content" minHeight="-1.0" minWidth="-1.0" prefHeight="862.0" prefWidth="405.0">
+                <ListView fx:id="calendarView" layoutX="5.0" layoutY="41.0" prefHeight="821.0" prefWidth="396.0" />
+                <HBox alignment="CENTER" layoutX="6.0" prefHeight="44.0" prefWidth="391.0" spacing="5.0">
                     <Button mnemonicParsing="false" onAction="#backOneMonth" text="&lt;" />
                     <Text fx:id="monthText" strokeType="OUTSIDE" strokeWidth="0.0" text="####">
                         <font>
@@ -121,7 +122,7 @@
         </ScrollPane>
         <AnchorPane>
             <Label alignment="CENTER" font="$x1" layoutX="14.0" layoutY="14.0" style="&#10;" text="Webview" textAlignment="CENTER" textFill="$x2" wrapText="false" />
-            <WebView fx:id="webViewWidget" layoutX="6.0" layoutY="41.0" prefHeight="649.0" prefWidth="440.0" />
+            <WebView fx:id="webViewWidget" layoutX="6.0" layoutY="41.0" prefHeight="822.0" prefWidth="703.0" />
         </AnchorPane>
     </SplitPane>
     <HBox id="HBox" alignment="CENTER_LEFT" spacing="5.0" VBox.vgrow="NEVER">

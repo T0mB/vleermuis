@@ -10,6 +10,8 @@ public interface SourceSiteLogic {
 
     void createLink(String name, String link);
 
+    void deleteLinks(List<SourceSite> links);
+
     List<SourceSite> getAllSites();
 
 }

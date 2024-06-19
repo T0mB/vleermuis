@@ -32,6 +32,11 @@ public class SourceSiteLogicImpl implements SourceSiteLogic {
     }
 
     @Override
+    public void deleteLinks(List<SourceSite> links) {
+        sourceSiteDAO.deleteAll(links);
+    }
+
+    @Override
     public List<SourceSite> getAllSites() {
         return StreamSupport.stream(sourceSiteDAO.findAll().spliterator(), false)
                 .collect(Collectors.toList());

@@ -1,6 +1,7 @@
 package com.planner.vleermuis.gui.controllers;
 
 import com.planner.vleermuis.businesslogic.SourceSiteLogic;
+import com.planner.vleermuis.common.Severity;
 import com.planner.vleermuis.data.SourceSite;
 import com.planner.vleermuis.gui.cells.SourceSiteListCell;
 import javafx.beans.value.ChangeListener;
@@ -23,6 +24,7 @@ import org.springframework.stereotype.Component;
 import java.io.IOException;
 import java.net.URL;
 import java.time.ZonedDateTime;
+import java.util.List;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
@@ -38,6 +40,9 @@ public class UserviewController implements Initializable {
 
     @Autowired
     private SourceSiteLogic sourceSiteLogic;
+
+    @Autowired
+    private MessagePopupController messagePopupController;
 
     @FXML
     private ListView<String> calendarView;
@@ -105,6 +110,7 @@ public class UserviewController implements Initializable {
             stage.show();
         }
         catch (IOException e) {
+            //TODO: better error handling
             e.printStackTrace();
         }
     }
@@ -115,7 +121,18 @@ public class UserviewController implements Initializable {
     }
 
     @FXML
-    void removeLinkClicked(){
+    void removeLinkClicked() throws Exception {
+        List<SourceSite> selectedLinks = sourceSiteListView.getSelectionModel().getSelectedItems();
+        if(selectedLinks != null && !selectedLinks.isEmpty()){
+            sourceSiteLogic.deleteLinks(selectedLinks);
+        }
+        else {
+            messagePopupController.createPopupMessage(Severity.INFO.text, "please select at least one link");
+        }
+    }
+
+    @FXML
+    void loadLinkClicked(){
         //TODO
     }
 
@@ -128,6 +145,8 @@ public class UserviewController implements Initializable {
         WebEngine webEngine = webViewWidget.getEngine();
         webEngine.load("http://google.com");
     }
+
+
 
 
 
