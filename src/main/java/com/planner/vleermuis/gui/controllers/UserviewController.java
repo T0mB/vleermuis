@@ -4,6 +4,7 @@ import com.planner.vleermuis.businesslogic.SourceSiteLogic;
 import com.planner.vleermuis.common.Severity;
 import com.planner.vleermuis.data.SourceSite;
 import com.planner.vleermuis.gui.cells.SourceSiteListCell;
+import com.planner.vleermuis.util.PlannerUtil;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -13,6 +14,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
@@ -34,6 +36,7 @@ public class UserviewController implements Initializable {
 
     ZonedDateTime today;
     ZonedDateTime pickedDate;
+    WebEngine webEngine;
 
     @Autowired
     private ConfigurableApplicationContext springContext;
@@ -59,7 +62,9 @@ public class UserviewController implements Initializable {
     @FXML
     private WebView webViewWidget;
 
-    String[] test = {"xyz", "abc"};
+    @FXML
+    private TextField textFieldWebsite;
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -69,7 +74,6 @@ public class UserviewController implements Initializable {
         sourceSiteListView.setCellFactory(param -> new SourceSiteListCell());
         sourceSiteListView.getItems().addAll(sourceSiteLogic.getAllSites());
 
-        calendarView.getItems().addAll(test);
         calendarView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
@@ -136,14 +140,26 @@ public class UserviewController implements Initializable {
         //TODO
     }
 
+    @FXML
+    void goToWebsite(){
+        String url = PlannerUtil.sanitizeUrl(textFieldWebsite.getText());
+        if(url != null){
+            webViewWidget.getEngine().load(url);
+        }
+        else {
+            messagePopupController.createPopupMessage(Severity.INFO.text, "please fill in a correct link");
+        }
+
+    }
+
     private void drawCalendarView() {
         monthText.setText(pickedDate.getMonth().name());
         yearText.setText(String.valueOf(pickedDate.getYear()));
     }
 
     private void setUpWebView(){
-        WebEngine webEngine = webViewWidget.getEngine();
-        webEngine.load("http://google.com");
+        webEngine = webViewWidget.getEngine();
+        webEngine.load("http://google.com"); //TODO change to first site in list
     }
 
 
