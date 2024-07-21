@@ -13,6 +13,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
@@ -84,7 +85,7 @@ public class UserviewController implements Initializable {
         monthText.setText(today.getMonth().name());
         yearText.setText(String.valueOf(today.getYear()));
 
-        setUpWebView();
+        setUpWebView(sourceSiteLogic.getAllSites().getFirst());
     }
 
 
@@ -110,25 +111,53 @@ public class UserviewController implements Initializable {
             Parent root = fxmlLoader.load();
             Stage stage = new Stage();
             stage.setTitle("Add link");
-            stage.setScene(new Scene(root));
+            Scene scene = new Scene(root);
+            Label idLabel = (Label) scene.lookup("#sourceSiteId");
+            idLabel.setText(null);
+            stage.setScene(scene);
             stage.show();
         }
         catch (IOException e) {
-            //TODO: better error handling
-            e.printStackTrace();
+            messagePopupController.createPopupMessage(Severity.ERROR.text, e.getMessage());
         }
     }
 
     @FXML
     void editLinkClicked(){
-        //TODO
+        SourceSite site = sourceSiteListView.getSelectionModel().getSelectedItem();
+        if(site != null){
+            try {
+                FXMLLoader fxmlLoader = new FXMLLoader();
+                fxmlLoader.setControllerFactory(springContext::getBean);
+                fxmlLoader.setLocation(Objects.requireNonNull(getClass().getResource("/gui/addLinkView.fxml")));
+                Parent root = fxmlLoader.load();
+                Stage stage = new Stage();
+                stage.setTitle("Edit link");
+                Scene scene = new Scene(root);
+                TextField tfName = (TextField) scene.lookup("#linkNameTextField");
+                tfName.setText(site.getName());
+                TextField tfLink = (TextField) scene.lookup("#linkToWebsiteTextField");
+                tfLink.setText(site.getLink());
+                Label idLabel = (Label) scene.lookup("#sourceSiteId");
+                idLabel.setText(String.valueOf(site.getId()));
+                stage.setScene(scene);
+                stage.show();
+            }
+            catch (IOException e) {
+                messagePopupController.createPopupMessage(Severity.ERROR.text, e.getMessage());
+            }
+        }
+        else{
+            messagePopupController.createPopupMessage(Severity.INFO.text, "please select a site to load");
+        }
     }
 
     @FXML
-    void removeLinkClicked() throws Exception {
+    void removeLinkClicked() {
         List<SourceSite> selectedLinks = sourceSiteListView.getSelectionModel().getSelectedItems();
         if(selectedLinks != null && !selectedLinks.isEmpty()){
             sourceSiteLogic.deleteLinks(selectedLinks);
+            refreshSourceSiteListView();
         }
         else {
             messagePopupController.createPopupMessage(Severity.INFO.text, "please select at least one link");
@@ -137,7 +166,13 @@ public class UserviewController implements Initializable {
 
     @FXML
     void loadLinkClicked(){
-        //TODO
+        SourceSite site = sourceSiteListView.getSelectionModel().getSelectedItem();
+        if(site != null){
+            webViewWidget.getEngine().load(site.getLink());
+        }
+        else {
+            messagePopupController.createPopupMessage(Severity.INFO.text, "please select a site to load");
+        }
     }
 
     @FXML
@@ -157,11 +192,17 @@ public class UserviewController implements Initializable {
         yearText.setText(String.valueOf(pickedDate.getYear()));
     }
 
-    private void setUpWebView(){
+    private void setUpWebView(SourceSite site){
         webEngine = webViewWidget.getEngine();
-        webEngine.load("http://google.com"); //TODO change to first site in list
+        if(site != null) {
+            webEngine.load(site.getLink());
+        }
     }
 
+    protected void refreshSourceSiteListView(){
+        sourceSiteListView.getItems().clear();
+        sourceSiteListView.getItems().addAll(sourceSiteLogic.getAllSites());
+    }
 
 
 

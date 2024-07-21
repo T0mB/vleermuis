@@ -8,7 +8,7 @@ import java.util.List;
 @Service
 public interface SourceSiteLogic {
 
-    void createLink(String name, String link);
+    void createLink(String id, String name, String link);
 
     void deleteLinks(List<SourceSite> links);
 

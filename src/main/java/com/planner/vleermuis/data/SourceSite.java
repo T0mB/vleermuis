@@ -9,7 +9,7 @@ public class SourceSite {
     @Id
     @Column(name="id", unique=true, updatable=false, nullable=false)
     @GeneratedValue
-    private long id;
+    private Long id;
 
     @Column(name="name", nullable=false)
     private String name;
@@ -42,4 +42,11 @@ public class SourceSite {
         return link;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setLink(String link) {
+        this.link = link;
+    }
 }

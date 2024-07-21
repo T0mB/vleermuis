@@ -24,6 +24,7 @@
                </children>
             </VBox>
             <Button fx:id="linkConfirmButton" layoutX="151.0" layoutY="131.0" mnemonicParsing="false" onAction="#addLinkConfirm" text="Confirm" />
+            <Label fx:id="sourceSiteId" layoutX="14.0" layoutY="135.0" opacity="0.0" text="Label" />
          </children>
       </AnchorPane>
    </children>
