@@ -2,7 +2,7 @@ package com.planner.vleermuis.data;
 
 import jakarta.persistence.*;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.Month;
 
 @Entity
@@ -20,7 +20,7 @@ public class Activity {
     private String location;
 
     @Column(name="at_date", nullable = false)
-    private LocalDate atDate;
+    private LocalDateTime atDate;
 
     @Column(name="description")
     private String description;
@@ -47,7 +47,7 @@ public class Activity {
         return location;
     }
 
-    public LocalDate getAtDate() {
+    public LocalDateTime getAtDate() {
         return atDate;
     }
 

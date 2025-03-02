@@ -187,6 +187,34 @@ public class UserviewController implements Initializable {
 
     }
 
+    @FXML
+    void addActivityClicked(ActionEvent event){
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setControllerFactory(springContext::getBean);
+            fxmlLoader.setLocation(Objects.requireNonNull(getClass().getResource("/gui/addActivityView.fxml")));
+            Parent root = fxmlLoader.load();
+            Stage stage = new Stage();
+            stage.setTitle("Add activity");
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        }
+        catch (IOException e) {
+            messagePopupController.createPopupMessage(Severity.ERROR.text, e.getMessage());
+        }
+    }
+
+    @FXML
+    void editActivityClicked(ActionEvent event){
+
+    }
+
+    @FXML
+    void deleteActivityClicked(ActionEvent event){
+
+    }
+
     private void drawCalendarView() {
         monthText.setText(pickedDate.getMonth().name());
         yearText.setText(String.valueOf(pickedDate.getYear()));

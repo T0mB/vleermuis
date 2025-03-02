@@ -3,6 +3,7 @@ package com.planner.vleermuis;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.stage.Stage;
+import org.springframework.boot.SpringApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ApplicationEvent;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -18,7 +19,6 @@ public class PlannerApplication extends Application {
 
     @Override
     public void start(Stage stage) {
-
         applicationContext.publishEvent(new StageReadyEvent(stage));
     }
 

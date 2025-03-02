@@ -39,7 +39,6 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TextField?>
@@ -51,8 +50,7 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.web.WebView?>
 
-
-<BorderPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.planner.vleermuis.gui.controllers.UserviewController">
+<BorderPane minHeight="600.0" minWidth="1200.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.planner.vleermuis.gui.controllers.UserviewController">
    <center>
       <BorderPane>
          <bottom>
@@ -74,7 +72,7 @@
          </bottom>
          <center>
              <SplitPane dividerPositions="0.206848357791754, 0.4954577218728162" focusTraversable="true" minHeight="-Infinity" BorderPane.alignment="CENTER">
-               <BorderPane prefHeight="200.0" prefWidth="200.0">
+               <BorderPane minHeight="490.0" minWidth="200.0">
                   <top>
                         <Label alignment="CENTER" minWidth="60.0" prefWidth="-1.0" style="&#10;" text="Master" textAlignment="CENTER" wrapText="false" BorderPane.alignment="CENTER">
                             <font>
@@ -86,7 +84,7 @@
                         </Label>
                   </top>
                   <center>
-                        <ListView fx:id="sourceSiteListView" BorderPane.alignment="CENTER" />
+                        <ListView fx:id="sourceSiteListView" minHeight="490.0" BorderPane.alignment="CENTER" />
                   </center>
                   <bottom>
                         <HBox spacing="5.0" BorderPane.alignment="CENTER">
@@ -94,43 +92,63 @@
                             <Button mnemonicParsing="false" onAction="#editLinkClicked" text="Edit" />
                             <Button mnemonicParsing="false" onAction="#removeLinkClicked" text="Remove" />
                         <Button mnemonicParsing="false" onAction="#loadLinkClicked" text="Load" />
+                        <padding>
+                           <Insets top="2.0" />
+                        </padding>
                         </HBox>
                   </bottom>
                </BorderPane>
-                 <ScrollPane prefHeight="-1.0" prefWidth="-1.0">
-                  <BorderPane>
-                     <top>
-                            <HBox alignment="CENTER" prefHeight="44.0" prefWidth="391.0" spacing="5.0" BorderPane.alignment="CENTER">
-                                <Button mnemonicParsing="false" onAction="#backOneMonth" text="&lt;" />
-                                <Text fx:id="monthText" strokeType="OUTSIDE" strokeWidth="0.0" text="####">
-                                    <font>
-                                        <Font size="22.0" />
-                                    </font>
-                                </Text>
-                                <Text fx:id="yearText" strokeType="OUTSIDE" strokeWidth="0.0" text="####">
-                                    <font>
-                                        <Font size="22.0" />
-                                    </font>
-                                </Text>
-                                <Button mnemonicParsing="false" onAction="#forwardOneMonth" text="&gt;" />
-                            </HBox>
-                     </top>
-                     <center>
-                            <ListView fx:id="calendarView" BorderPane.alignment="CENTER" />
-                     </center>
-                  </BorderPane>
-                 </ScrollPane>
+               <BorderPane minWidth="340.0" prefWidth="340.0">
+                  <top>
+                         <HBox alignment="CENTER" prefHeight="44.0" prefWidth="391.0" spacing="5.0" BorderPane.alignment="CENTER">
+                             <Button mnemonicParsing="false" onAction="#backOneMonth" text="&lt;" />
+                             <Text fx:id="monthText" strokeType="OUTSIDE" strokeWidth="0.0" text="####">
+                                 <font>
+                                     <Font size="22.0" />
+                                 </font>
+                             </Text>
+                             <Text fx:id="yearText" strokeType="OUTSIDE" strokeWidth="0.0" text="####">
+                                 <font>
+                                     <Font size="22.0" />
+                                 </font>
+                             </Text>
+                             <Button mnemonicParsing="false" onAction="#forwardOneMonth" text="&gt;" />
+                         </HBox>
+                  </top>
+                  <center>
+                         <ListView fx:id="calendarView" minHeight="480.0" minWidth="250.0" BorderPane.alignment="CENTER" />
+                  </center>
+                  <bottom>
+                     <HBox prefHeight="27.0" prefWidth="341.0" spacing="5.0" BorderPane.alignment="CENTER">
+                        <children>
+                           <Button mnemonicParsing="false" onAction="#addActivityClicked" text="Add" />
+                           <Button mnemonicParsing="false" onAction="#editActivityClicked" text="Edit" />
+                           <Button mnemonicParsing="false" onAction="#deleteActivityClicked" text="Delete" />
+                        </children>
+                        <BorderPane.margin>
+                           <Insets />
+                        </BorderPane.margin>
+                        <padding>
+                           <Insets top="2.0" />
+                        </padding>
+                     </HBox>
+                  </bottom>
+               </BorderPane>
                <BorderPane>
                   <top>
                      <HBox BorderPane.alignment="CENTER">
                         <children>
-                           <TextField fx:id="textFieldWebsite" />
+                           <TextField fx:id="textFieldWebsite" minHeight="20.0" minWidth="550.0" />
                            <Button mnemonicParsing="false" onAction="#goToWebsite" text="go" />
                         </children>
                      </HBox>
                   </top>
                   <center>
-                        <WebView fx:id="webViewWidget" minHeight="-1.0" minWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" BorderPane.alignment="CENTER" />
+                        <WebView fx:id="webViewWidget" maxHeight="-1.0" maxWidth="-1.0" minHeight="500.0" minWidth="600.0" prefHeight="-1.0" prefWidth="-1.0" BorderPane.alignment="CENTER">
+                        <BorderPane.margin>
+                           <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                        </BorderPane.margin>
+                     </WebView>
                   </center>
                </BorderPane>
              </SplitPane>
