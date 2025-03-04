@@ -84,8 +84,13 @@ public class UserviewController implements Initializable {
 
         monthText.setText(today.getMonth().name());
         yearText.setText(String.valueOf(today.getYear()));
-
-        setUpWebView(sourceSiteLogic.getAllSites().getFirst());
+        List<SourceSite> sites = sourceSiteLogic.getAllSites();
+        if(!sites.isEmpty()) {
+            setUpWebView(sourceSiteLogic.getAllSites().getFirst());
+        }
+        else {
+            webEngine = webViewWidget.getEngine();
+        }
     }
 
 
