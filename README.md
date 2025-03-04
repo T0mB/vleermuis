@@ -1,4 +1,4 @@
-- Little planner application -
+Little planner application
 I made this because i wanted to try out some of the new JavaFX stuff and to keep track of events i want to go, because i dont use facebook anymore and therefore also dont use the event calendar thing they have.
 As of now it's pretty bare bones:
   - you can save/edit links to websites (i.e. for venues you frequent)
