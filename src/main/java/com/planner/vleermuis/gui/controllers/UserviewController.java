@@ -1,8 +1,11 @@
 package com.planner.vleermuis.gui.controllers;
 
+import com.planner.vleermuis.businesslogic.ActivityLogic;
 import com.planner.vleermuis.businesslogic.SourceSiteLogic;
 import com.planner.vleermuis.common.Severity;
+import com.planner.vleermuis.data.Activity;
 import com.planner.vleermuis.data.SourceSite;
+import com.planner.vleermuis.gui.cells.ActivityListCell;
 import com.planner.vleermuis.gui.cells.SourceSiteListCell;
 import com.planner.vleermuis.util.PlannerUtil;
 import javafx.beans.value.ChangeListener;
@@ -26,6 +29,7 @@ import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.Month;
 import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Objects;
@@ -46,10 +50,13 @@ public class UserviewController implements Initializable {
     private SourceSiteLogic sourceSiteLogic;
 
     @Autowired
+    private ActivityLogic activityLogic;
+
+    @Autowired
     private MessagePopupController messagePopupController;
 
     @FXML
-    private ListView<String> calendarView;
+    private ListView<Activity> calendarView;
 
     @FXML
     private Text monthText;
@@ -75,15 +82,11 @@ public class UserviewController implements Initializable {
         sourceSiteListView.setCellFactory(param -> new SourceSiteListCell());
         sourceSiteListView.getItems().addAll(sourceSiteLogic.getAllSites());
 
-        calendarView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
-                //TODO make listener :)
-            }
-        });
-
         monthText.setText(today.getMonth().name());
         yearText.setText(String.valueOf(today.getYear()));
+
+        calendarView.setCellFactory(param -> new ActivityListCell());
+        calendarView.getItems().addAll(activityLogic.getAllActivitiesForMonthAndYear(Month.valueOf(monthText.getText()), Integer.valueOf(yearText.getText())));
 
         setUpWebView(sourceSiteLogic.getAllSites().getFirst());
     }
@@ -218,6 +221,8 @@ public class UserviewController implements Initializable {
     private void drawCalendarView() {
         monthText.setText(pickedDate.getMonth().name());
         yearText.setText(String.valueOf(pickedDate.getYear()));
+        calendarView.getItems().clear();
+        calendarView.getItems().addAll(activityLogic.getAllActivitiesForMonthAndYear(Month.valueOf(monthText.getText()), Integer.valueOf(yearText.getText())));
     }
 
     private void setUpWebView(SourceSite site){
@@ -230,6 +235,10 @@ public class UserviewController implements Initializable {
     protected void refreshSourceSiteListView(){
         sourceSiteListView.getItems().clear();
         sourceSiteListView.getItems().addAll(sourceSiteLogic.getAllSites());
+    }
+
+    protected void refreshActivitiesListView(){
+        drawCalendarView();
     }
 
 
