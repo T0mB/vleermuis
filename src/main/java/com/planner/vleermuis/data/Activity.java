@@ -55,4 +55,23 @@ public class Activity {
         return description;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public void setAtDate(LocalDateTime atDate) {
+        this.atDate = atDate;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setAgenda(Agenda agenda) {
+        this.agenda = agenda;
+    }
 }

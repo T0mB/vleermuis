@@ -14,4 +14,8 @@ public class PlannerUtil {
             return HTTPS_PREFIX + url;
         }
     }
+
+    public static boolean isValidTime(String time){
+        return time.matches("^\\d{2}:\\d{2}$");
+    }
 }

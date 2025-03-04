@@ -18,8 +18,7 @@
             <DatePicker fx:id="activityDate" />
             <HBox alignment="TOP_RIGHT" prefHeight="29.0" prefWidth="276.0" spacing="6.0">
                <children>
-                  <Button mnemonicParsing="false" onAction="#saveActivity" text="Save" />
-                  <Button mnemonicParsing="false" onAction="#cancelActivity" text="Cancel" />
+                  <Button fx:id="activityAddButton" mnemonicParsing="false" onAction="#saveActivity" text="Save" />
                </children>
             </HBox>
          </children>
