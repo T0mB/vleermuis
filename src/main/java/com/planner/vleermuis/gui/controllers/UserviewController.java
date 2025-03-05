@@ -86,11 +86,18 @@ public class UserviewController implements Initializable {
 
         monthText.setText(today.getMonth().name());
         yearText.setText(String.valueOf(today.getYear()));
+        List<SourceSite> sites = sourceSiteLogic.getAllSites();
+        if(!sites.isEmpty()) {
+            setUpWebView(sourceSiteLogic.getAllSites().getFirst());
+        }
+        else {
+            webEngine = webViewWidget.getEngine();
+        }
 
         calendarView.setCellFactory(param -> new ActivityListCell());
         calendarView.getItems().addAll(activityLogic.getAllActivitiesForMonthAndYear(Month.valueOf(monthText.getText()), Integer.valueOf(yearText.getText())));
 
-        setUpWebView(sourceSiteLogic.getAllSites().getFirst());
+
     }
 
 
