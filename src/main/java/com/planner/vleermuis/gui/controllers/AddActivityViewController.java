@@ -7,6 +7,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
@@ -36,10 +37,13 @@ public class AddActivityViewController implements Initializable {
     TextField activityTime;
 
     @FXML
-    public DatePicker activityDate;
+    DatePicker activityDate;
 
     @FXML
-    public Button activityAddButton;
+    Button activityAddButton;
+
+    @FXML
+    Label activityId;
 
     @Autowired
     ActivityLogic activityLogic;
@@ -62,6 +66,12 @@ public class AddActivityViewController implements Initializable {
             activity.setLocation(activityLocation.getText());
             activity.setDescription(activityDescription.getText());
             activity.setAtDate(LocalDateTime.of(activityDate.getValue(), LocalTime.parse(time)));
+            if(activityId.getText() != null){
+                activity.setId(Long.parseLong(activityId.getText()));
+            }
+            else {
+                activity.setId(null);
+            }
             activityLogic.createActivity(activity);
 
             userviewController.refreshActivitiesListView();
@@ -70,9 +80,5 @@ public class AddActivityViewController implements Initializable {
 
         }
 
-    }
-
-    @FXML
-    public void cancelActivity(ActionEvent actionEvent) {
     }
 }

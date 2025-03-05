@@ -11,7 +11,7 @@ public class Activity {
     @Id
     @Column(name="id", unique=true, updatable=false, nullable=false)
     @GeneratedValue
-    private long id;
+    private Long id;
 
     @Column(name="name", nullable=false)
     private String name;
@@ -55,6 +55,10 @@ public class Activity {
         return description;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public void setName(String name) {
         this.name = name;
     }
@@ -74,4 +78,6 @@ public class Activity {
     public void setAgenda(Agenda agenda) {
         this.agenda = agenda;
     }
+
+
 }

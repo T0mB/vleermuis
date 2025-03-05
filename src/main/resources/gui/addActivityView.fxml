@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<TitledPane animated="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="226.0" prefWidth="298.0" text="save activity" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.planner.vleermuis.gui.controllers.AddActivityViewController">
-   <content>
-      <VBox alignment="CENTER_LEFT" prefHeight="374.0" prefWidth="278.0" spacing="6.0">
+
+<BorderPane prefHeight="216.0" prefWidth="278.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.planner.vleermuis.gui.controllers.AddActivityViewController">
+   <center>
+      <VBox alignment="CENTER_LEFT" prefHeight="374.0" prefWidth="278.0" spacing="6.0" BorderPane.alignment="CENTER">
          <children>
             <TextField fx:id="activityName" text="name" />
             <TextField fx:id="activityLocation" text="location" />
@@ -18,10 +21,14 @@
             <DatePicker fx:id="activityDate" />
             <HBox alignment="TOP_RIGHT" prefHeight="29.0" prefWidth="276.0" spacing="6.0">
                <children>
+                  <Label fx:id="activityId" opacity="0.0" text="label" />
                   <Button fx:id="activityAddButton" mnemonicParsing="false" onAction="#saveActivity" text="Save" />
                </children>
             </HBox>
          </children>
       </VBox>
-   </content>
-</TitledPane>
+   </center>
+   <padding>
+      <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
+   </padding>
+</BorderPane>

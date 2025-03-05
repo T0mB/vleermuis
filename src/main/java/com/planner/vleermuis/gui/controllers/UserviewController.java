@@ -16,6 +16,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
@@ -31,6 +32,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.time.Month;
 import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Objects;
 import java.util.ResourceBundle;
@@ -200,8 +202,11 @@ public class UserviewController implements Initializable {
             Stage stage = new Stage();
             stage.setTitle("Add activity");
             Scene scene = new Scene(root);
+            Label idLabel = (Label) scene.lookup("#activityId");
+            idLabel.setText(null);
             stage.setScene(scene);
             stage.show();
+
         }
         catch (IOException e) {
             messagePopupController.createPopupMessage(Severity.ERROR.text, e.getMessage());
@@ -210,7 +215,44 @@ public class UserviewController implements Initializable {
 
     @FXML
     void editActivityClicked(ActionEvent event){
+        Activity activity = calendarView.getSelectionModel().getSelectedItem();
+        if(activity != null){
+            try {
+                FXMLLoader fxmlLoader = new FXMLLoader();
+                fxmlLoader.setControllerFactory(springContext::getBean);
+                fxmlLoader.setLocation(Objects.requireNonNull(getClass().getResource("/gui/addActivityView.fxml")));
+                Parent root = fxmlLoader.load();
+                Stage stage = new Stage();
+                stage.setTitle("Edit activity");
+                Scene scene = new Scene(root);
+                TextField tfName = (TextField) scene.lookup("#activityName");
+                tfName.setText(activity.getName());
 
+                TextField tfLocation = (TextField) scene.lookup("#activityLocation");
+                tfLocation.setText(activity.getLocation());
+
+                TextField tfDescription = (TextField) scene.lookup("#activityDescription");
+                tfDescription.setText(activity.getDescription());
+
+                TextField tfTime = (TextField) scene.lookup("#activityTime");
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+                tfTime.setText(activity.getAtDate().format(formatter));
+
+                DatePicker dpDateAt = (DatePicker) scene.lookup("#activityDate");
+                dpDateAt.setValue(activity.getAtDate().toLocalDate());
+
+                Label idLabel = (Label) scene.lookup("#activityId");
+                idLabel.setText(String.valueOf(activity.getId()));
+                stage.setScene(scene);
+                stage.show();
+            }
+            catch (IOException e) {
+                messagePopupController.createPopupMessage(Severity.ERROR.text, e.getMessage());
+            }
+        }
+        else{
+            messagePopupController.createPopupMessage(Severity.INFO.text, "please select a site to load");
+        }
     }
 
     @FXML

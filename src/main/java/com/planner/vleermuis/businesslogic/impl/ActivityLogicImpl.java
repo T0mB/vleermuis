@@ -29,7 +29,11 @@ public class ActivityLogicImpl implements ActivityLogic {
     @Override
     public void createActivity(Activity activity) {
         Optional<Agenda> agenda = agendaDAO.findById(1L);
-        if(agenda.isPresent()){
+        if(activity.getId() != null && agenda.isPresent()) {
+            activity.setAgenda(agenda.get());
+            activityDAO.save(activity);
+        }
+        else if(agenda.isPresent()){
             activity.setAgenda(agenda.get());
             activityDAO.save(activity);
         }
