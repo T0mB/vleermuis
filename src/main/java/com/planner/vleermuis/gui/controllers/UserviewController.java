@@ -33,6 +33,7 @@ import java.net.URL;
 import java.time.Month;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 import java.util.ResourceBundle;
@@ -265,13 +266,23 @@ public class UserviewController implements Initializable {
     @FXML
     void deleteActivityClicked(ActionEvent event){
 
+        List<Activity> selectedActivities = calendarView.getSelectionModel().getSelectedItems();
+        if(selectedActivities != null && !selectedActivities.isEmpty()){
+            activityLogic.deleteActivities(selectedActivities);
+            refreshActivitiesListView();
+        }
+        else {
+            messagePopupController.createPopupMessage(Severity.INFO.text, "please select at least one activity");
+        }
+
     }
 
     private void drawCalendarView() {
         monthText.setText(pickedDate.getMonth().name());
         yearText.setText(String.valueOf(pickedDate.getYear()));
         calendarView.getItems().clear();
-        calendarView.getItems().addAll(activityLogic.getAllActivitiesForMonthAndYear(Month.valueOf(monthText.getText()), Integer.valueOf(yearText.getText())));
+        List<Activity> activityList = activityLogic.getAllActivitiesForMonthAndYear(Month.valueOf(monthText.getText()), Integer.valueOf(yearText.getText()));
+        calendarView.getItems().addAll(activityList);
     }
 
     private void setUpWebView(SourceSite site){

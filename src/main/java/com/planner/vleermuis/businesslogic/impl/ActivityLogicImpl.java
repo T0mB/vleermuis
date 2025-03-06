@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 import java.time.LocalDateTime;
 import java.time.Month;
 import java.time.Year;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -40,8 +41,8 @@ public class ActivityLogicImpl implements ActivityLogic {
     }
 
     @Override
-    public void deleteActivity(Activity activity) {
-        activityDAO.delete(activity);
+    public void deleteActivities(List<Activity> activities) {
+        activityDAO.deleteAll(activities);
     }
 
     @Override
@@ -49,6 +50,7 @@ public class ActivityLogicImpl implements ActivityLogic {
         return StreamSupport.stream(activityDAO.findAll().spliterator(), false)
                 .filter(a -> a.getAtDate().getMonth().equals(month)
                         && a.getAtDate().getYear() == year)
+                .sorted(Comparator.comparing(Activity::getAtDate))
                 .toList();
     }
 

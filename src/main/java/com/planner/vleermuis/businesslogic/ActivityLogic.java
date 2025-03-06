@@ -14,7 +14,7 @@ public interface ActivityLogic {
 
     void createActivity(Activity activity);
 
-    void deleteActivity(Activity activity);
+    void deleteActivities(List<Activity> activities);
 
     List<Activity> getAllActivitiesForMonthAndYear(Month month, Integer year);
 }
